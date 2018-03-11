@@ -1,0 +1,37 @@
+{
+  "name": "doot-op",
+  "description": "JS Object manipulation and transformation (doot-op for dot path operations)",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": {
+    "name": "Honoré Nintunze",
+    "email": "nintu.lab@gmail.com",
+    "url": "https://nintu.me",
+    "twitter": "https://twitter.com/nash_403"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nash403/doot.git"
+  },
+  "homepage": "https://github.com/nash403/doot#readme",
+  "bugs": {
+    "url": "https://github.com/nash403/doot/issues"
+  },
+  "scripts": {
+    "lint": "xo",
+    "lint:fix": "xo --fix",
+    "test": "xo && ava"
+  },
+  "dependencies": {
+    "is-obj": "^1.0.1"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "xo": "^0.20.3"
+  },
+  "xo": {
+    "semicolon": false,
+    "prettier": true
+  }
+}
