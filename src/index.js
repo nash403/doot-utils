@@ -1,24 +1,4 @@
-/* Var source = {
-  "id": 1,
-  "contact": {
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "example@gmail.com",
-  }
-}
-
-ver tgt = {
-
-}
-
-var obj = {
-  id: 'my-id',
-  nes: { ted: { value: true } },
-  other: { nested: { stuff: 5 } },
-  some: { array: ['A', 'B'] }
-}; */
-
-// method (aliases,...): arguments | forwardedValue, value
+// Method (aliases,...): arguments | forwardedValue, value
 // get: sourceObj, key (can be a fn call or falsy), [[args], [default]] | inner prop, inner prop
 // set (modify): sourceObj, key, value | sourceObj modified, sourceObj modified
 // copy (cp): sourceObj, keySource, tgtObj, keyTgt, [mods] | tgtObj modified, soureObj untouched
@@ -39,57 +19,61 @@ var obj = {
 
 // dotty.get(source,'contact').set('lastName', 'Smith').copy('', obj, 'yap')
 
-const get = require('./get')
-const set = require('./set')
-const move = require('./move')
-const copy = require('./copy')
-const del = require('./del')
+const get = require('./lib/get')
+const set = require('./lib/set')
+const move = require('./lib/move')
+const copy = require('./lib/copy')
+const del = require('./lib/del')
 
-function Dotify(obj) {
-  this.value = obj
-  this.chainValue = obj
-  this.collect = () => {
-    return this.value
+class Doot {
+  constructor(obj) {
+    this.objectRef = obj
+    this.value = obj
+    this.chainValue = obj
   }
-}
 
-Dotify.prototype.get = function(...args) {
-  const res = get(this.chainValue, ...args)
-  this.value = res
-  this.chainValue = res
-  console.log('inner get', res, this)
-  return this
-}
+  root(obj) {
+    this.value = obj || this.objectRef
+    this.chainValue = obj || this.objectRef
+    return this
+  }
 
-Dotify.prototype.set = function(...args) {
-  const res = set(this.chainValue, ...args)
-  this.value = res
-  this.chainValue = res
-  console.log('inner set', res, this)
-  return this
-}
+  static use(fn) {
+    fn(Doot)
+  }
 
-Dotify.prototype.move = function(...args) {
-  const res = move(this.chainValue, ...args)
-  this.value = res
-  this.chainValue = res
-  console.log('inner move', res, this)
-  return this
-}
+  get(...args) {
+    const res = get(this.chainValue, ...args)
+    this.value = res
+    this.chainValue = res
+    return this
+  }
 
-Dotify.prototype.copy = function(...args) {
-  const res = copy(this.chainValue, ...args)
-  this.value = res
-  this.chainValue = res
-  console.log('inner copy', res, this)
-  return this
-}
+  set(...args) {
+    this.value = set(this.chainValue, ...args)
+    return this
+  }
 
-Dotify.prototype.del = function(...args) {
-  const res = del(this.chainValue, ...args)
-  this.value = res
-  console.log('inner del', res, this)
-  return this
+  del(...args) {
+    this.value = del(this.chainValue, ...args)
+    return this
+  }
+
+  move(...args) {
+    const res = move(this.chainValue, ...args)
+    this.value = res
+    this.chainValue = res
+    console.log('inner move', res, this)
+    return this
+  }
+
+  copy(...args) {
+    const res = copy(this.chainValue, ...args)
+    this.value = res
+    this.chainValue = res
+    console.log('inner copy', res, this)
+    return this
+  }
 }
 
 module.exports = {
@@ -98,89 +82,6 @@ module.exports = {
   move,
   copy,
   del,
-  dotify: obj => new Dotify(obj)
-  //   Dotify(obj) {
-  //     this.value = obj;
-  //     this.chainValue = obj;
-  //     this.get = obj => {
-  //       let res = get(obj);
-  //       this.value = obj;
-  //       this.chainValue = obj;
-  //       return this;
-  //     };
-  //     // console.log("fzfez", this);
-  //   }
+  Doot,
+  dootify: obj => new Doot(obj)
 }
-
-// Const Kitten = function(obj) {
-// This.value = obj;
-// this.chainValue = obj;
-/* this.get = function(obj) {
-    this.value = obj;
-    this.chainValue = obj;
-    console.log('get',JSON.stringify(this), this.value.obj)
-    return this;
-  };
-
-  this.set = function(obj) {
-    this.value = obj;
-    this.chainValue = obj;
-    console.log('set',JSON.stringify(this), this.value.obj)
-    return this;
-  };
-
-  this.move = function(obj) {
-    this.value = obj;
-    this.chainValue = obj;
-    console.log('move',JSON.stringify(this), this.value.obj)
-    return this;
-  }; */
-// console.log('init',JSON.stringify(this), this.value.obj)
-// return this.value
-// }
-
-// Kitten.prototype.get = function(obj) {
-//   this.value = obj;
-//   this.chainValue = obj;
-//   console.log('get2',JSON.stringify(this), this.value.obj)
-//   for (let p in this.__proto__) {
-//       //console.log('proto',p)
-//     this[p] = this.__proto__[p].bind(this, this.value)
-//   }
-//   return this;
-// };
-
-// Kitten.prototype.set = function(obj) {
-//   this.value = obj;
-//   this.chainValue = obj;
-//   console.log('set2',JSON.stringify(this), this.value.obj)
-//   return this;
-// };
-
-// Kitten.prototype.move = function(obj) {
-//   this.value = obj;
-//   this.chainValue = obj;
-//   console.log('move2',JSON.stringify(this), this.value.obj)
-//   return this;
-// };
-
-// let oldProto = Kitten.prototype
-// Kitten = function (obj) {
-//     this.value = obj;
-//   this.chainValue = obj;
-//   console.log('init',this)//JSON.stringify(this), this.value.obj)
-//   return this.value
-// }
-// Kitten.prototype = oldProto
-
-// let o1 = {obj: 1}
-// let o2 = {obj: 2}
-// let o3 = {obj: 3}
-// let o4 = {obj: 4}
-
-// console.log('result',
-//     Kitten.get
-//     //.get(o2)
-//     //.set(o3)
-//     //.move(o4)()
-// )

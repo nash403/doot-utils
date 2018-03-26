@@ -21,7 +21,9 @@
   "scripts": {
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "test": "xo && ava"
+    "test": "xo && ava",
+    "build": "0",
+    "release": "yarn build && yarn test && yarn publish"
   },
   "dependencies": {
     "is-obj": "^1.0.1"
