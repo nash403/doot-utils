@@ -18,6 +18,15 @@
   "bugs": {
     "url": "https://github.com/nash403/doot/issues"
   },
+  "keywords": [
+    "js-object",
+    "deep-get",
+    "deep-set",
+    "dot-path",
+    "safe",
+    "helper",
+    "TypeError"
+  ],
   "scripts": {
     "lint": "xo",
     "lint:fix": "xo --fix",
