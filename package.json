@@ -1,8 +1,8 @@
 {
-  "name": "doot-op",
-  "description": "JS Object manipulation and transformation (doot-op for dot path operations)",
+  "name": "doot-utils",
+  "description": "JS Object manipulation with dot path and some magical helpers",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "dist/doot-utils.js",
   "author": {
     "name": "Honoré Nintunze",
     "email": "nintu.lab@gmail.com",
@@ -12,37 +12,52 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nash403/doot.git"
+    "url": "https://github.com/nash403/doot-utils.git"
   },
-  "homepage": "https://github.com/nash403/doot#readme",
+  "homepage": "https://github.com/nash403/doot-utils#readme",
   "bugs": {
-    "url": "https://github.com/nash403/doot/issues"
+    "url": "https://github.com/nash403/doot-utils/issues"
   },
   "keywords": [
     "js-object",
-    "deep-get",
-    "deep-set",
+    "deep",
+    "get",
+    "set",
     "dot-path",
     "safe",
     "helper",
-    "TypeError"
+    "TypeError",
+    "extansible"
   ],
   "scripts": {
     "lint": "xo",
     "lint:fix": "xo --fix",
     "test": "xo && ava",
-    "build": "0",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack",
     "release": "yarn build && yarn test && yarn publish"
-  },
-  "dependencies": {
-    "is-obj": "^1.0.1"
   },
   "devDependencies": {
     "ava": "^0.25.0",
+    "cross-env": "^5.1.4",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14",
     "xo": "^0.20.3"
   },
   "xo": {
     "semicolon": false,
     "prettier": true
-  }
+  },
+  "browserlist": [
+    "last 2 Chrome versions",
+    "not Chrome < 60",
+    "last 2 Safari versions",
+    "not Safari < 10.1",
+    "last 2 iOS versions",
+    "not iOS < 10.3",
+    "last 2 Firefox versions",
+    "not Firefox < 54",
+    "last 2 Edge versions",
+    "not Edge < 15"
+  ]
 }

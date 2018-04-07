@@ -1,5 +1,5 @@
 const test = require('ava')
-const _ = require('../src/lib/set')
+const _ = require('../src/lib/core/set')
 
 const obj = {
   a: {
@@ -24,9 +24,9 @@ function check(t, path, from, to) {
   t.is(out, expected, `set(obj, "${path.join('.')}", ${to}) should be ${expected}, got ${out}`)
 }
 
-test('set', t => {
+test('Test method: set', t => {
   check(t, ['a', 'b', 'z'], 12, 2)
   check(t, ['a', 'b', 'nale'], undefined, true)
   check(t, ['d', 'e'], false, true)
-  t.is(_(obj, 'a.v.c', undefined), obj.a.v.c)
+  t.is(_(obj, 'a.v.c', 'lol'), obj.a.v.c)
 })

@@ -1,7 +1,7 @@
 const test = require('ava')
-const toPath = require('../src/helpers/to-path')
+const toPath = require('../src/lib/helpers/to-path')
 
-test('toPath', t => {
+test('Test helper: toPath', t => {
   const check = (v, expected) => t.deepEqual(toPath(v), expected)
   check('d[0]', ['d', 0])
   check('d.1', ['d', '1'])

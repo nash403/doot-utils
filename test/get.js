@@ -1,7 +1,7 @@
 const test = require('ava')
-const _ = require('../src/lib/get')
+const _ = require('../src/lib/core/get')
 
-test('get', t => {
+test('Test method: get', t => {
   const obj = {
     a: {
       b: {
