@@ -6,10 +6,14 @@
 
 <hr />
 
-[![version][version-badge]][package]
-[![downloads][downloads-badge]][npmtrends]
-[![MIT License][license-badge]][license]
-[![PRs Welcome][prs-badge]][prs]
+
+
+[![package version](https://img.shields.io/github/package-json/v/badges/shields.svg)](https://github.com/nash403/doot-utils)
+[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/doot-utils)
+[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+[![forthebadge](http://forthebadge.com/badges/built-with-love.svg)](http://forthebadge.com)
 
 
 ## Installation
