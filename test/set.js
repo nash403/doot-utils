@@ -12,7 +12,8 @@ const obj = {
   },
   d: {
     e: false
-  }
+  },
+  dummy: 'something'
 }
 
 function check(t, path, from, to) {
@@ -28,5 +29,7 @@ test('Test method: set', t => {
   check(t, ['a', 'b', 'z'], 12, 2)
   check(t, ['a', 'b', 'nale'], undefined, true)
   check(t, ['d', 'e'], false, true)
+  check(t, ['dummy'], 'something', 'value')
+  t.is(_(obj, 'dummy', 'value'), obj.dummy)
   t.is(_(obj, 'a.v.c', 'lol'), obj.a.v.c)
 })

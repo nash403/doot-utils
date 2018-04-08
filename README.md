@@ -142,7 +142,80 @@ If you want to author a plugin for Doot, please call it `doot-plugin-<pluginname
 
 ## API
 
-> TODO (base, copy, del, get, move, set, use)
+> When used as methods, all helper functions will be passed `this.chainValue` as first parameter so you just have to pass the remaining parameters.
+
+### `Doot#base([obj])`
+
+*Sets `this.value` & `this.chainValue` to the object provided when creating the instance (`new Doot({...}`)) or to the argument `obj` if defined.*
+
+### `copy(obj, path, targetObject [, targetPath [, modifierFn [, isMove] ] ])`
+
+*Copies a nested property from a source object to a destination object.*
+
+**Return value:** The copied value, or `undefined` if the path does not exist in source object.
+
+`path` & `targetPath` can be either a dot path string or an array of keys. `targetPath` is an _optional_ parameter, it will be the same as `path` if not given.
+
+`modifierFn` is a function that will be applied if you wish to transform the value found at obj[path] before copying it to the target. It will be given the following arguments: `modifierFn(value, sourcePath, targetPath)`. This parameter is _optionnal_ and will default to `v => v`.
+
+`isMove` is a boolean that defaults to `false`. If true the copied property value will be removed from source after the copy.
+
+**NOTE:** When used as as Doot method, it will set `this.value` to the copied value and `this.chainValue` to the target object.
+
+Examples: _TODO_
+
+### `del(obj, path)` *(core)*
+
+*Deletes a nested property from an object.*
+
+**Return value:** `true` if the property was deleted, `false` otherwise.
+
+`path` is either a dot path string or an array of keys.
+
+**NOTE:** When used as as Doot method, it will set `this.value` to `true`/`false` and `this.chainValue` will remain the same but altered object.
+
+Examples: _TODO_
+
+### `get(obj, path [, ...args])` *(core)*
+
+*Gets a nested property of an object.*
+
+**Return value:** the nested property value or `undefined`.
+
+`path` is either a dot path string or an array of keys.
+
+The last element of `args` is returned as the default value if the nested property does not exist.
+<br/>
+If the last key of `path` ends with `'()'`, it will be interpreted as a function call and the function will be passed `...args` as parameters.
+<br/> :warning: If you are making a function call, then keep in mind that the last argument you give is the default value if the path does not exist.
+
+**NOTE:** When used as as Doot method, it will set both `this.value` and `this.chainValue` to the nested property value.
+
+Examples: _TODO_
+
+### `move(obj, path, targetObject [, targetPath [, modifierFn] ])`
+
+*It is just an alias to `copy` with the `isMove` argument set to true*
+
+See `copy` above for more details.
+
+### `set(obj, path, value)` *(core)*
+
+*Sets a nested property of an object to the given value.*
+
+**Return value:** the nested property value or `undefined`.
+
+`path` is either a dot path string or an array of keys.
+
+**NOTE:** When used as as Doot method, it will set `this.value` to the value you are setting and `this.chainValue` will remain the same but altered object.
+
+Examples: _TODO_
+
+### `Doot#use(pluginFn)`
+
+*Use a new plugin that will extend the `Doot` prototype with new feature(s).*
+
+A plugin is a function that will be called with the `Doot` class you have to extend.
 
 ## Licence
 
