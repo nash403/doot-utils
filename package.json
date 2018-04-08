@@ -1,7 +1,7 @@
 {
   "name": "doot-utils",
   "description": "JS Object manipulation with dot path and some magical helpers",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "dist/doot-utils.js",
   "author": {
     "name": "Honoré Nintunze",
